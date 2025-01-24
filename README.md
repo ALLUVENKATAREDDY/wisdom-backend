@@ -239,4 +239,5 @@ To deploy the project:
 2. Deploy to a platform like Heroku or AWS.
 3. Test the live APIs using the deployed URL.
 
-Wisdom Peak Backend API:https://wisdom-backend-hoqd.onrender.com
+### Deployment Testing URL
+Base URL: https://wisdom-backend-hoqd.onrender.com
