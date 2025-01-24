@@ -17,13 +17,13 @@ The purpose of this project is to develop a backend system for a basic Customer 
 ### Step 1: Clone the Repository
 - git clone https://github.com/ALLUVENKATAREDDY/wisdom-backend/tree/master
 - cd wisdom-peak-analytics
-```
+
 
 ### Step 2: Install Dependencies
 Run the following command to install all required dependencies:
 
 npm install
-```
+
 
 ### Step 3: Configure Environment Variables
 Create a `.env` file in the root of your project and configure the following variables:
