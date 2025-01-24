@@ -1,0 +1,24 @@
+{
+    "development": {
+      "username": "root",
+      "password": "pspk@777",
+      "database": "wisdom",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "root",
+      "password": "pspk@777",
+      "database": "test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": "pspk@777",
+      "database": "production",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+  }
+  
