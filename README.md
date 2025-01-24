@@ -228,8 +228,8 @@ By default, the server will run at `http://localhost:3000`.
 - Get a Customer by ID: `http://localhost:3000/customers/1`
 - Update Customer: `http://localhost:3000/customers/1`
 - Delete Customer: `http://localhost:3000/customers/1`
--Filter Customers :`http://localhost:3000/customers?name=ram`
--Paginated Search and Filtering API:`http://localhost:3000/customers?page=1&limit=5&name=jake`
+- Filter Customers :`http://localhost:3000/customers?name=ram`
+- Paginated Search and Filtering API:`http://localhost:3000/customers?page=1&limit=5&name=jake`
 
 ---
 
