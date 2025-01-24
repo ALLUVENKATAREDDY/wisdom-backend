@@ -15,14 +15,13 @@ The purpose of this project is to develop a backend system for a basic Customer 
 ## Setting up the Project Locally
 
 ### Step 1: Clone the Repository
-```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/ALLUVENKATAREDDY/wisdom-backend/tree/master
+cd wisdom-peak-analytics
 ```
 
 ### Step 2: Install Dependencies
 Run the following command to install all required dependencies:
-```bash
+
 npm install
 ```
 
@@ -40,18 +39,18 @@ JWT_SECRET=your_secret_key
 ### Step 4: Set Up the Database
 1. Create a database named `wisdom` in your MySQL server.
 2. Run the migrations to set up the tables:
-```bash
+
 npx sequelize-cli db:migrate
-```
+
 
 ### Step 5: Start the Server
 Run the server using the following command:
-```bash
+
 npm start
-```
+
 By default, the server will run at `http://localhost:3000`.
 
----
+
 
 ## API Endpoints
 
@@ -229,6 +228,8 @@ By default, the server will run at `http://localhost:3000`.
 - Get a Customer by ID: `http://localhost:3000/customers/1`
 - Update Customer: `http://localhost:3000/customers/1`
 - Delete Customer: `http://localhost:3000/customers/1`
+-Filter Customers :`http://localhost:3000/customers?name=ram`
+-Paginated Search and Filtering API:`http://localhost:3000/customers?page=1&limit=5&name=jake`
 
 ---
 
@@ -238,10 +239,4 @@ To deploy the project:
 2. Deploy to a platform like Heroku or AWS.
 3. Test the live APIs using the deployed URL.
 
----
-
-## Notes
-- Ensure secure storage of sensitive data (e.g., passwords, JWT secrets).
-- Follow code best practices and maintain proper documentation.
-- Implement robust error handling to manage unexpected inputs or system errors.
-
+Wisdom Peak Backend API:https://wisdom-backend-hoqd.onrender.com
