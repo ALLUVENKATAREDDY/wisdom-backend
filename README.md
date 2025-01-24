@@ -15,8 +15,8 @@ The purpose of this project is to develop a backend system for a basic Customer 
 ## Setting up the Project Locally
 
 ### Step 1: Clone the Repository
-git clone https://github.com/ALLUVENKATAREDDY/wisdom-backend/tree/master
-cd wisdom-peak-analytics
+- git clone https://github.com/ALLUVENKATAREDDY/wisdom-backend/tree/master
+- cd wisdom-peak-analytics
 ```
 
 ### Step 2: Install Dependencies
