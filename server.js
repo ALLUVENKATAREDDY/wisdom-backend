@@ -34,7 +34,7 @@ app.post('/users/login', (req, res) => {
   const user = users.find(u => u.username === username && u.password === password);
 
   if (user) {
-    const token = jwt.sign({ username: user.username, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username, role: user.role }, SECRET_KEY, {expiresIn: '7days' });
     res.status(200).send({
       message: 'Login successful!',
       user: { username: user.username, role: user.role },
@@ -62,13 +62,54 @@ app.post('/customers', (req, res) => {
   });
 });
 
-// Get all customers
 app.get('/customers', (req, res) => {
-  res.status(200).send({
-    message: 'Customers retrieved successfully!',
-    customers,
+    const { page = 1, limit = 10, name, email, phone, company } = req.query;
+  
+    // Filters: Apply filters to the array
+    let filteredCustomers = customers;
+  
+    if (name) {
+      filteredCustomers = filteredCustomers.filter(customer =>
+        customer.name.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+    if (email) {
+      filteredCustomers = filteredCustomers.filter(customer =>
+        customer.email.toLowerCase().includes(email.toLowerCase())
+      );
+    }
+    if (phone) {
+      filteredCustomers = filteredCustomers.filter(customer =>
+        customer.phone.includes(phone)
+      );
+    }
+    if (company) {
+      filteredCustomers = filteredCustomers.filter(customer =>
+        customer.company.toLowerCase().includes(company.toLowerCase())
+      );
+    }
+  
+    // Pagination: Calculate start and end index
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + parseInt(limit);
+  
+    const paginatedCustomers = filteredCustomers.slice(startIndex, endIndex);
+  
+    // Metadata for pagination
+    const response = {
+      total: filteredCustomers.length,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      totalPages: Math.ceil(filteredCustomers.length / limit),
+      customers: paginatedCustomers,
+    };
+  
+    res.status(200).send({
+      message: 'Customers retrieved successfully!',
+      data: response,
+    });
   });
-});
+  
 
 // Get a customer by ID
 app.get('/customers/:id', (req, res) => {

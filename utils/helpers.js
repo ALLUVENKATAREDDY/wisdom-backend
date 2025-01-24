@@ -1,14 +1,12 @@
-function paginateQuery(query, page = 1, limit = 10) {
+exports.handleSuccess = (res, message, data, status = 200) => {
+  res.status(status).json({ message, data });
+};
+
+exports.handleError = (res, message, status = 500, error = '') => {
+  res.status(status).json({ message, error });
+};
+
+exports.paginateQuery = async (query, page, limit) => {
   const offset = (page - 1) * limit;
-  return query.limit(limit).offset(offset);
-}
-
-function handleError(res, message, statusCode = 400, details = {}) {
-  return res.status(statusCode).json({ error: message, details });
-}
-
-function handleSuccess(res, message, data = {}, statusCode = 200) {
-  return res.status(statusCode).json({ message, data });
-}
-
-module.exports = { paginateQuery, handleError, handleSuccess };
+  return query.findAll({ limit, offset });
+};

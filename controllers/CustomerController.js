@@ -22,20 +22,43 @@ exports.createCustomer = async (req, res) => {
   }
 };
 
-// Get all customers with pagination and filtering
+
+
 exports.getCustomers = async (req, res) => {
   const { page = 1, limit = 10, name, email, phone, company } = req.query;
-  const filters = { where: {} };
 
-  if (name) filters.where.name = { [Op.like]: `%${name}%` };
-  if (email) filters.where.email = { [Op.like]: `%${email}%` };
-  if (phone) filters.where.phone = { [Op.like]: `%${phone}%` };
-  if (company) filters.where.company = { [Op.like]: `%${company}%` };
+  // Filters: Build the `where` object dynamically based on query params
+  const filters = {};
+  if (name) filters.name = { [Op.like]: `%${name}%` };
+  if (email) filters.email = { [Op.like]: `%${email}%` };
+  if (phone) filters.phone = { [Op.like]: `%${phone}%` };
+  if (company) filters.company = { [Op.like]: `%${company}%` };
+
+  // Pagination: Calculate `limit` and `offset`
+  const offset = (page - 1) * limit;
 
   try {
-    const customers = await paginateQuery(Customer.findAll(filters), page, limit);
-    handleSuccess(res, 'Customers fetched successfully', customers);
+    // Fetch paginated and filtered data with total count
+    const { rows: customers, count: total } = await Customer.findAndCountAll({
+      where: filters,   // Apply filters
+      limit: parseInt(limit), // Apply limit
+      offset: parseInt(offset), // Apply offset
+      order: [['createdAt', 'DESC']], // Sort by creation date (optional)
+    });
+
+    // Prepare response with metadata
+    const response = {
+      total,               // Total number of matching records
+      page: parseInt(page),  // Current page
+      limit: parseInt(limit), // Limit per page
+      totalPages: Math.ceil(total / limit), // Total pages
+      customers,            // List of customers for the current page
+    };
+
+    // Send success response
+    handleSuccess(res, 'Customers fetched successfully', response);
   } catch (error) {
+    // Send error response
     handleError(res, 'Error fetching customers', 500, error.message);
   }
 };
